@@ -3,6 +3,5 @@
 
 Disclamer: the code sucks ass, is a big mess and has no comments. And it's my first time using OpenGL
 
-https://github.com/BKrajancic/SFMPanoramaTool
-it's meant to be combined with BKrajnicics SFMPanoramatool, but also works with the 6 camera rig found here:
-https://steamcommunity.com/sharedfiles/filedetails/?id=1438340646
+
+it's meant to be combined with [BKrajnicics SFMPanoramatool](https://github.com/BKrajancic/SFMPanoramaTool), but also works with the 6 camera rig found [here](https://steamcommunity.com/sharedfiles/filedetails/?id=1438340646)
