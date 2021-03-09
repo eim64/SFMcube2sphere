@@ -14,8 +14,6 @@ namespace SFMcube2sphere
     public class Renderer
     {
         const string VertexShaderPath = @".\shader.vert";
-        const string FragmentShaderPath = @".\shader.frag";
-
 
 
         static int Width;
@@ -43,11 +41,11 @@ namespace SFMcube2sphere
         };
 
 
-        public static void Start(int width, int height)
+        public static void Start(int width, int height, string shaderpath)
         {
             if (wnd != null) throw new Exception("You gotta stop the damn thing before you start it again!");
 
-            wnd = new GameWindow(width,height, GraphicsMode.Default);
+            wnd = new GameWindow(width,height, new GraphicsMode());
             wnd.Visible = false;
             //Too lazy to make my own context
             wnd.MakeCurrent();
@@ -85,13 +83,14 @@ namespace SFMcube2sphere
                 , fshader = GL.CreateShader(ShaderType.FragmentShader);
 
             GL.ShaderSource(vshader, File.ReadAllText(VertexShaderPath));
-            GL.ShaderSource(fshader, File.ReadAllText(FragmentShaderPath));
+            GL.ShaderSource(fshader, File.ReadAllText(shaderpath));
 
             GL.CompileShader(vshader);
-
-
-
             GL.CompileShader(fshader);
+
+            string errmessage = "";
+            GL.GetShaderInfoLog(fshader, out errmessage);
+            System.Diagnostics.Debug.WriteLine(errmessage);
 
             _shaderProgram = GL.CreateProgram();
             GL.AttachShader(_shaderProgram, vshader);

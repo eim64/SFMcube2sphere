@@ -14,17 +14,19 @@ namespace SFMcube2sphere
     public partial class RenderForm : Form
     {
         string FileName;
+        string ShaderName;
         int Frames, W, H;
         Form1 form;
         Thread t;
 
-        public RenderForm(string filename, int width, int height,Form1 parent)
+        public RenderForm(string filename, int width, int height, string shadername, Form1 parent)
         {
             FileName = filename;
             InitializeComponent();
             W = width;
             H= height;
             form = parent;
+            ShaderName = shadername;
             progressBar1.Maximum = Frames = form.Sequences.Min(x=>x.Count);
             DialogResult = DialogResult.OK;
         }
@@ -41,7 +43,7 @@ namespace SFMcube2sphere
 
         void Render()
         {
-            Renderer.Start(W,H);
+            Renderer.Start(W,H, ShaderName);
             for (int frame = 0; frame < Frames; frame++)
             {
                 Invoke((MethodInvoker)delegate { progressBar1.Value = frame; });

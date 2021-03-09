@@ -27,6 +27,8 @@ namespace SFMcube2sphere
         };
 
 
+        private string GetShaderName() => AABox.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked)?.Tag as string ?? "./shader.frag";
+
         public Form1()
         {
             InitializeComponent();
@@ -132,6 +134,7 @@ namespace SFMcube2sphere
         private void button1_Click(object sender, EventArgs e) => openSFM.ShowDialog();
 
 
+
         void Render(string FileName, int Width, int Height)
         {
             PixelFormat format = boxorder[0].Image.PixelFormat;
@@ -145,7 +148,7 @@ namespace SFMcube2sphere
 
             RenderButton.Enabled = false;
             try {
-                new RenderForm(FileName, Width, Height, this).Show();
+                new RenderForm(FileName, Width, Height, GetShaderName(), this).Show();
             }
             catch
             {
